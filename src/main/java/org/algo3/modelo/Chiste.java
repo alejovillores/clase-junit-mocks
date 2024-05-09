@@ -24,6 +24,10 @@ public class Chiste {
         return Objects.equals(this.categoria, c);
     }
 
+    public int getPuntaje() {
+        return this.puntaje;
+    }
+
     public boolean esMalo() {
         return this.puntaje < 5;
     }

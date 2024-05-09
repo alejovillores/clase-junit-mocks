@@ -5,6 +5,7 @@ import org.algo3.modelo.proveedor.Proveedor;
 import org.algo3.modelo.tiempo.Tiempo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Yayo {
 
@@ -20,6 +21,14 @@ public class Yayo {
 
     public ArrayList<Chiste> todosLosChistes(){
         return this.chistes;
+    }
+
+    public ArrayList<Chiste> mejoresChistes(int cantidad) {
+        Comparator<Chiste> comparadorPuntaje = Comparator.comparingInt(Chiste::getPuntaje).reversed();
+        return chistes.stream()
+                .sorted(comparadorPuntaje)
+                .limit(cantidad)
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
 
     private Chiste puntuar(Chiste chiste){

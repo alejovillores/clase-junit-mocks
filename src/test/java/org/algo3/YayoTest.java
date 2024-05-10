@@ -12,6 +12,7 @@ import static org.mockito.Mockito.*;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class YayoTest {
 
@@ -176,6 +177,47 @@ public class YayoTest {
 
         //Assert
         Assert.assertFalse(chiste.esMalo());
+
+    }
+
+    @Test
+    public void seObtienenLosMejoresChistesDeYayoCorrectamente(){
+        // Arrange
+        Chiste chisteMalo = new Chiste("Programming","Hello pepe!","Hello pepe!");
+        Chiste chisteBueno = new Chiste("Christmas","Hello pepe!","Hi Mark");
+
+        Invitado invitadoStub = mock(Invitado.class);
+        when(invitadoStub.puntuar(chisteMalo)).thenReturn(4);
+        when(invitadoStub.puntuar(chisteBueno)).thenReturn(9);
+
+        Proveedor proovedorStub = mock(Proveedor.class);
+        when(proovedorStub.solicitarChiste("Christmas", "en")).thenReturn(chisteMalo);
+
+
+        Tiempo tiempoStub = mock(Tiempo.class);
+        when(tiempoStub.obtenerDiaDeHoy()).thenReturn(5);
+
+        Yayo yayo = new Yayo(proovedorStub, invitadoStub);
+
+        int cantidadChistesBuenosEsperados = 5;
+        //Act
+        yayo.contarChiste(tiempoStub);
+        yayo.contarChiste(tiempoStub);
+        yayo.contarChiste(tiempoStub);
+        yayo.contarChiste(tiempoStub);
+        when(proovedorStub.solicitarChiste("Christmas", "en")).thenReturn(chisteBueno);
+        yayo.contarChiste(tiempoStub);
+        yayo.contarChiste(tiempoStub);
+        yayo.contarChiste(tiempoStub);
+        List<Chiste> chistes = yayo.mejoresChistes(cantidadChistesBuenosEsperados);
+
+        //Assert con 5 chistes
+        Assert.assertEquals(cantidadChistesBuenosEsperados, chistes.size());
+
+        cantidadChistesBuenosEsperados = 3;
+        chistes = yayo.mejoresChistes(cantidadChistesBuenosEsperados);
+        //Assert con 3 chistes
+        Assert.assertEquals(cantidadChistesBuenosEsperados, chistes.size());
 
     }
 

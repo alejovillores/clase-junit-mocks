@@ -27,4 +27,8 @@ public class Chiste {
     public boolean esMalo() {
         return this.puntaje < 5;
     }
+
+    public int tieneMasPuntajeQue(Chiste unChiste) {
+        return Math.max(puntaje, unChiste.puntaje);
+    }
 }

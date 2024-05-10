@@ -199,7 +199,7 @@ public class YayoTest {
 
         Yayo yayo = new Yayo(proovedorStub, invitadoStub);
 
-        int cantidadChistesBuenosEsperados = 3;
+        int cantidadChistesBuenosEsperados = 5;
         //Act
         yayo.contarChiste(tiempoStub);
         yayo.contarChiste(tiempoStub);
@@ -211,8 +211,14 @@ public class YayoTest {
         yayo.contarChiste(tiempoStub);
         List<Chiste> chistes = yayo.mejoresChistes(cantidadChistesBuenosEsperados);
 
-        //Assert
+        //Assert con 5 chistes
         Assert.assertEquals(cantidadChistesBuenosEsperados, chistes.size());
+
+        cantidadChistesBuenosEsperados = 3;
+        chistes = yayo.mejoresChistes(cantidadChistesBuenosEsperados);
+        //Assert con 3 chistes
+        Assert.assertEquals(cantidadChistesBuenosEsperados, chistes.size());
+
     }
 
     @Ignore("Test es ignorado")

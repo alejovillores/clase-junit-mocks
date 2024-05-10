@@ -51,7 +51,7 @@ public class YayoIntegrationTest {
     @Test
     public void yayoSoliciitaAlProveedorTextoChistesDeProgramacion() {
         when(tiempoMock.obtenerDiaDeHoy()).thenReturn(2);
-        String dir = "src/chistes/chistesCopados";
+        String dir = "src/test/chistes/chistesCopados.txt";
         Proveedor proveedorTexto = new ProveedorTexto(dir);
 
         Yayo yayo = new Yayo(proveedorTexto, invitadoMock);

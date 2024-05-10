@@ -5,6 +5,7 @@ import org.algo3.modelo.proveedor.Proveedor;
 import org.algo3.modelo.tiempo.Tiempo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,8 +64,9 @@ public class Yayo {
 
     public List<Chiste> mejoresChistes(int cantidad) {
         return chistes.stream()
-                .filter(chiste -> !chiste.esMalo())
+                .sorted(Chiste::tieneMasPuntajeQue)
                 .limit(cantidad)
                 .collect(Collectors.toList());
     }
+
 }
